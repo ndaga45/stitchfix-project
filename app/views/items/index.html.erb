@@ -1,0 +1,57 @@
+<p> Jump to:
+  <%- @group_labels.each do |label| -%>
+    <%- if label -%> 
+      <a class='category_link' href='#<%= label %>'> <%= label.capitalize %> </a>
+     <%- end %>
+  <%- end %>
+</p>
+
+<%- @groups.each do |key, items| -%>
+  <%- if key -%> 
+    <h3>
+     <a name='<%= key %>' class='anchor'> <%= @group_by.capitalize %>: <%= key.to_s.capitalize %> </a>
+    </h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> Item ID </th>
+          <th> Style Name </th>
+          <th> Style ID </th>
+          <th> Size </th>
+          <th> Color </th>
+          <%- if items[0].price_sold -%>
+            <th> Price Sold </th>
+          <%- end -%>
+          <%- if key == 'sellable' -%>
+            <th> Retail Price </th>
+            <th> Wholesale Price </th>
+          <%- end -%>
+          <%- if key == 'clearanced' -%>
+            <th> Clearance Batch ID </th>
+          <%- end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <%- items.each do |item| -%>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= Style.find(item.style_id).name %></td>
+            <td><%= item.style_id %></td>
+            <td><%= item.size %></td>
+            <td><%= item.color %></td>
+            <%- if item.price_sold -%>
+              <td><%= number_to_currency(item.price_sold) %></td>
+            <%- end -%>
+            <%- if key == 'sellable' -%>
+              <td><%= number_to_currency(Style.find(item.style_id).retail_price) %></td>
+              <td><%= number_to_currency(Style.find(item.style_id).wholesale_price) %></td>
+            <%- end -%>
+            <%- if key == 'clearanced' -%>
+              <td><%= item.clearance_batch_id %></td>
+            <%- end -%>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  <%- end -%>
+<%- end -%>

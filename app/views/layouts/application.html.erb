@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TakeHomeChallenge</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+  <h1>Stitch Fix Clearance Tool</h1>
+  <p><%= link_to 'Back to home', clearance_batches_path %></p>
+  <p> Browse all items by:
+    <span class="items_link"><%= link_to 'Status', items_path(:group_by => 'status') %></span>
+    <span class="items_link"><%= link_to 'Clearance Batch', items_path(:group_by => 'batch') %></span>
+  </p>
+  <%- if flash[:notice] -%>
+    <div class="alert alert-info" role="alert">
+      <%= flash[:notice].html_safe %>
+    </div>
+  <%- end -%>
+  <%- if flash[:alert] -%>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:alert].html_safe %>
+    </div>
+  <%- end -%>
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<h3>Clearance Batch <%= @id %></h3>
+<span> Created at: <%= l(@clearance_batch.created_at, format: :short) %></span>
+
+<table class="table table-striped clearance_batch_report">
+  <thead>
+    <tr>
+      <th>Style</th>
+      <th>Style ID</th>
+      <th>Colors</th>
+      <th>Sizes</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @clearanced_styles.each do |style_id, hash| -%>
+      <%- hash.each do |size, value| -%>
+        <tr>
+          <td><%= value[:name] %></td>
+          <td><%= style_id %></td>
+          <td><%= value[:color] %></td>
+          <td><%= size %></td>
+          <td><%= value[:count] %></td>
+          <td><%= number_to_currency(value[:price]) %></td>
+          <td><%= number_to_currency(value[:price] * value[:count]) %></td>
+        </tr>
+      <%- end -%>
+    <%- end -%>
+    <tr id='total'>
+      <td> Total </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= @clearance_batch.items.count %></td>
+      <td></td>
+      <td><%= number_to_currency(@total) %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,39 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+form {
+    width: 400px;
+    float: left;
+    padding-left: 20px;
+}
+
+button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+table {
+    margin-top: 20px;
+}
+
+#total {
+    font-weight: bold;
+}
+
+.items_link,
+.category_link {
+    padding-left: 20px;
+}
+
+.anchor {
+    color: #000000;
+    text-decoration: none;
+}
+
+h2 {
+    clear: both;
+}
